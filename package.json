@@ -4,35 +4,32 @@
   "description": "API for various work with runes",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "start:webpack": "npm run build",
-    "start:cloudworker": "cloudworker ./dist/worker.production.js",
-    "dev": "rm -rf ./dist && npm run start:webpack && npm run start:cloudworker",
-    "start": "wrangler preview",
+    "build": "NODE_ENV=production tsc",
     "up": "npm run start",
+    "dev": "nodemon --watch \"src/**/*.ts\" --ignore \"node_modules/**/*\" --exec ts-node src/Server.ts",
+    "start": "npm run build && NODE_ENV=production node dist/Server.js",
     "prettier:fix": "prettier --write '**/*.{ts,js,json,md}'",
     "test": "jest"
   },
-  "author": "author",
-  "license": "MIT OR Apache-2.0",
+  "author": "Brandon Slinkard",
+  "license": "MIT",
   "devDependencies": {
-    "@cloudflare/workers-types": "^1.0.9",
-    "@dollarshaveclub/cloudworker": "^0.1.2",
+    "@types/express": "^4.17.7",
     "@types/jest": "^26.0.0",
-    "@types/node-fetch": "^2.5.7",
     "jest": "^26.0.1",
     "jest-cli": "^26.0.1",
     "jest-junit": "^10.0.0",
+    "nodemon": "^2.0.4",
     "prettier": "^1.19.1",
     "ts-jest": "^26.1.0",
     "ts-loader": "^6.2.2",
-    "typescript": "^3.9.3",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.3"
   },
   "dependencies": {
-    "node-fetch": "^2.6.0",
-    "query-string": "^6.13.1",
-    "url": "^0.11.0"
+    "@tsed/common": "^5.60.6",
+    "@tsed/core": "^5.60.6",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
   }
 }
