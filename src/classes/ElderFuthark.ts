@@ -3,7 +3,7 @@ import { berkano } from './runes/ElderFuthark/berkano';
 import { ansuz } from './runes/ElderFuthark/ansuz';
 import { thurisaz } from './runes/ElderFuthark/thurisaz';
 import { uruz } from './runes/ElderFuthark/uruz';
-import { fehu } from './runes/ElderFuthark/Fehu';
+import { fehu } from './runes/ElderFuthark/fehu';
 import { raidho } from './runes/ElderFuthark/raidho';
 import { kenaz } from './runes/ElderFuthark/kenaz';
 import { gebo } from './runes/ElderFuthark/gebo';
