@@ -1,0 +1,11 @@
+.github/
+.vscode/
+dist/
+node_modules/
+test/
+.dockerignore
+.gitignore
+.prettierrc
+jest.config.js
+*.md
+
