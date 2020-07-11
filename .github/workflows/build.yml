@@ -36,9 +36,5 @@ jobs:
 
       - name: npm test
         run: npm test
-
-      - name: publish
-        if: $BRANCH_NAME == master
-        uses: cloudflare/wrangler-action@1.2.0
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
+      # - name: build and publish
+      # if: ${BRANCH_NAME} == master
