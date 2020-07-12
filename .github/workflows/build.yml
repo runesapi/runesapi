@@ -43,7 +43,7 @@ jobs:
           echo "::set-env name=VERSION::$VERSION"
           echo "::set-env name=VERSION_MAJOR::$VERSION_MAJOR"
           echo "::set-env name=VERSION_MAJOR_MINOR::$VERSION_MAJOR.$VERSION_MINOR"
-          echo "::set-env name=VERSION_MAJOR_MINOR_PATCH::$VERSION_MAJOR.$VERSION_MINOR_PATCH"
+          echo "::set-env name=VERSION_MAJOR_MINOR_PATCH::$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"
 
       - name: Docker login
         run: docker login --username $DOCKER_USER --password $DOCKER_PASSWORD
