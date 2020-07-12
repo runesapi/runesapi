@@ -72,9 +72,8 @@ jobs:
           DOCKER_BUILDKIT: 1
           BUILDKIT_PROGRESS: plain
         with:
-          repository: ${{ github.event.repository.name }}
+          repository: runesapi/runesapi
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_API_KEY }}
           tags: ${{ steps.get_tags.outputs.tags }}
           add_git_labels: true
-          push: true
