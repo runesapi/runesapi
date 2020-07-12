@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV=production tsc",
-    "up": "docker-compose up",
+    "up": "docker-compose up -d",
     "dev": "nodemon --watch \"src/**/*.ts\" --ignore \"node_modules/**/*\" --exec ts-node src/Server.ts",
     "start": "npm run build && NODE_ENV=production node dist/Server.js",
     "prettier:fix": "prettier --write '**/*.{ts,js,json,md}'",
@@ -15,7 +15,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.7",
-    "@types/jest": "^26.0.0",
+    "@types/jest": "^26.0.4",
     "jest": "^26.0.1",
     "jest-cli": "^26.0.1",
     "jest-junit": "^10.0.0",

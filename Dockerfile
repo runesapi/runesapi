@@ -11,7 +11,7 @@ RUN npm prune --production
 RUN rm -rf src tsconfig.json
 
 EXPOSE 8080/tcp
-ENTRYPOINT [ "./dist/Server.js" ]
+ENTRYPOINT ["node", "./dist/Server.js" ]
 
 
 
