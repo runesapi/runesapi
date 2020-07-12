@@ -11,7 +11,7 @@ export class ElderFutharkController {
     @QueryParams('aett') aett?: string,
     @QueryParams('name') name?: string,
   ): Promise<IRune[]> {
-    let retVal: IRune[] = JSON.parse(JSON.stringify(this.elderFuthark));
+    let retVal: IRune[] = JSON.parse(JSON.stringify(this.elderFuthark.runes));
 
     if (aett) {
       retVal = this.elderFuthark.runes.filter(rune => rune.aett === aett);
