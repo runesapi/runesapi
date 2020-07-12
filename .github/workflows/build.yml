@@ -60,12 +60,12 @@ jobs:
       - name: Docker build & push
         if: github.event_name == 'push'
         run: |
-          docker build . -t $VERSION -t $VERSION_MAJOR -t $VERSION_MAJOR_MINOR -t $VERSION_MAJOR_MINOR_PATCH -t latest --username ${{ secrets.DOCKERHUB_USER}} --password ${{secrets.DOCKERHUB_API_KEY}}
+          docker build . -t $VERSION -t $VERSION_MAJOR -t $VERSION_MAJOR_MINOR -t $VERSION_MAJOR_MINOR_PATCH -t latest
 
           if [ $BRANCH_NAME = "master" ]; then
-            docker push ${{ github.event.repository.name }}:$VERSION
-            docker push ${{ github.event.repository.name }}:$VERSION_MAJOR
-            docker push ${{ github.event.repository.name }}:$VERSION_MAJOR_MINOR
-            docker push ${{ github.event.repository.name }}:$VERSION_MAJOR_MINOR_PATCH
-            docker push ${{ github.event.repository.name }}:$latest
+            docker push ${{ github.event.repository.name }}:$VERSION  --username ${{ secrets.DOCKERHUB_USER}} --password ${{secrets.DOCKERHUB_API_KEY}}
+            docker push ${{ github.event.repository.name }}:$VERSION_MAJOR  --username ${{ secrets.DOCKERHUB_USER}} --password ${{secrets.DOCKERHUB_API_KEY}}
+            docker push ${{ github.event.repository.name }}:$VERSION_MAJOR_MINOR  --username ${{ secrets.DOCKERHUB_USER}} --password ${{secrets.DOCKERHUB_API_KEY}}
+            docker push ${{ github.event.repository.name }}:$VERSION_MAJOR_MINOR_PATCH  --username ${{ secrets.DOCKERHUB_USER}} --password ${{secrets.DOCKERHUB_API_KEY}}
+            docker push ${{ github.event.repository.name }}:$latest  --username ${{ secrets.DOCKERHUB_USER}} --password ${{secrets.DOCKERHUB_API_KEY}}
           fi
