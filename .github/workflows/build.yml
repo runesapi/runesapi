@@ -62,6 +62,8 @@ jobs:
         run: |
           docker build . -t $VERSION -t $VERSION_MAJOR -t $VERSION_MAJOR_MINOR -t $VERSION_MAJOR_MINOR_PATCH -t latest
 
+          echo $BRANCH_NAME
+
           if [ $BRANCH_NAME = "master" ]; then
             docker push ${{ github.event.repository.name }}:$VERSION
             docker push ${{ github.event.repository.name }}:$VERSION_MAJOR
