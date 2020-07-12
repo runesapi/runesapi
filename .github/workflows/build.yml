@@ -45,5 +45,26 @@ jobs:
 
       - name: Unit Tests
         run: npm test
-      # - name: build and publish
-      # if: ${BRANCH_NAME} == master
+
+      - name: Get docker image tags
+        id: get_tags
+        if: github.event_name == 'push'
+        run: |
+          if [ $BRANCH_NAME = "master" ]; then
+            echo "::set-output name=tags::$VERSION_TAG, $APP_VERSION, $APP_VERSION_MAJOR, $APP_VERSION_MAJOR_MINOR, latest"
+          fi
+
+      - name: Docker build
+        if: github.event_name == 'push'
+        uses: docker/build-push-action@v1
+        env:
+          DOCKER_BUILDKIT: 1
+          BUILDKIT_PROGRESS: plain
+        with:
+          registry: https://hub.docker.com/
+          repository: ${{ github.event.repository.name }}
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_API_KEY }}
+          tags: ${{ steps.get_tags.outputs.tags }}
+          add_git_labels: true
+          push: true
