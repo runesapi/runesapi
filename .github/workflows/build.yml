@@ -60,8 +60,8 @@ jobs:
       - name: Docker build & push
         if: github.event_name == 'push'
         run: |
-          docker build . --tag $IMAGE_NAME:$VERSION_TAG, $VERSION, $VERSION_MAJOR, $VERSION_MAJOR_MINOR, $VERSION_MAJOR_MINOR_PATCH, latest --username ${{ secrets.DOCKERHUB_USER}} --password ${{secrets.DOCKERHUB_API_KEY}}
+          docker build . --tag ${{ github.event.repository.name }}:$VERSION_TAG, $VERSION, $VERSION_MAJOR, $VERSION_MAJOR_MINOR, $VERSION_MAJOR_MINOR_PATCH, latest --username ${{ secrets.DOCKERHUB_USER}} --password ${{secrets.DOCKERHUB_API_KEY}}
 
           if [ $BRANCH_NAME = "master" ]; then
-            docker push $IMAGE_NAME:$VERSION_TAG
+            docker push ${{ github.event.repository.name }}:$VERSION_TAG
           fi
