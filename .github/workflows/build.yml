@@ -34,6 +34,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-npm-
 
+      - name: Setup variables
+        run: |
+          export VERSION=$(jq -r .version package.json)
+          export VERSION_MAJOR=$(jq -r '.version | split(".")[0]' package.json)
+          export VERSION_MINOR=$(jq -r '.version | split(".")[1]' package.json)
+          export VERSION_PATCH=$(jq -r '.version | split(".")[2]' package.json)
+          echo "::set-env name=VERSION::$VERSION"
+          echo "::set-env name=VERSION_MAJOR::$VERSION_MAJOR"
+          echo "::set-env name=VERSION_MAJOR_MINOR::$VERSION_MAJOR.$VERSION_MINOR"
+          echo "::set-env name=VERSION_MAJOR_MINOR_PATCH::$VERSION_MAJOR.$VERSION_MINOR_PATCH"
+
       - name: Docker login
         run: docker login --username $DOCKER_USER --password $DOCKER_PASSWORD
         env:
@@ -51,7 +62,7 @@ jobs:
         if: github.event_name == 'push'
         run: |
           if [ $BRANCH_NAME = "master" ]; then
-            echo "::set-output name=tags::$VERSION_TAG, $APP_VERSION, $APP_VERSION_MAJOR, $APP_VERSION_MAJOR_MINOR, latest"
+            echo "::set-output name=tags::$VERSION_TAG, $VERSION, $VERSION_MAJOR, $VERSION_MAJOR_MINOR, $VERSION_MAJOR_MINOR_PATCH, latest"
           fi
 
       - name: Docker build
@@ -61,7 +72,6 @@ jobs:
           DOCKER_BUILDKIT: 1
           BUILDKIT_PROGRESS: plain
         with:
-          registry: https://hub.docker.com/
           repository: ${{ github.event.repository.name }}
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_API_KEY }}
